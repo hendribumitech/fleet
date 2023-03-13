@@ -48,6 +48,7 @@ class EasyAuthorize
             'update' => 'update',
             'edit' => 'update',
         ];
+        
         $route = $request->route()->getName();
         $tmp = explode('.', $route);
         $arrLength = count($tmp);

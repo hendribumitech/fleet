@@ -7,14 +7,14 @@ use Spatie\Menu\Laravel\Link;
 if (!function_exists('localFormatDate')) {
     function localFormatDate($value)
     {
-        return Date::parse($value)->format(config('local.date_format'));
+        return $value ? Date::parse($value)->format(config('local.date_format')) : null;
     }
 }
 
 if (!function_exists('localFormatDateTime')) {
     function localFormatDateTime($value)
     {
-        return Date::parse($value)->format(config('local.datetime_format'));
+        return $value ? Date::parse($value)->format(config('local.datetime_format')) : null;
     }
 }
 

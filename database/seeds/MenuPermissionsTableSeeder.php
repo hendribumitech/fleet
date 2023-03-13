@@ -21,25 +21,25 @@ class MenuPermissionsTableSeeder extends Seeder
         \DB::table('menu_permissions')->insert(array (
             0 => 
             array (
-                'menu_id' => 4,
+                'menu_id' => 2,
                 'permission_id' => 1,
                 'status' => '1',
             ),
             1 => 
             array (
-                'menu_id' => 5,
+                'menu_id' => 3,
                 'permission_id' => 5,
                 'status' => '1',
             ),
             2 => 
             array (
-                'menu_id' => 6,
+                'menu_id' => 4,
                 'permission_id' => 9,
                 'status' => '1',
             ),
             3 => 
             array (
-                'menu_id' => 7,
+                'menu_id' => 5,
                 'permission_id' => 13,
                 'status' => '1',
             )            

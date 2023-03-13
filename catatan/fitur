@@ -1,0 +1,26 @@
+FITUR
+Fitur Fleet Management System
+Order Tracking
+Memantau dan mengelola data-data yang berkaitan dengan order dengan kategori tertentu dan terstruktur.
+
+Fleet Services and Maintenance
+Mengelola data-data yang berkaitan dengan service kendaraan dengan kategori tertentu dan laporan terstruktur.
+
+Fuel Usage Tracking
+Memantau data yang berhubungan dengan penggunaan bahan bakar kendaraan, pelaporan data menjadi lebih mudah.
+
+Pajak
+Memantau dan mengelola data yang berhubungan dengan pajak dan KIR kendaraan, laporan menjadi lebih terstruktur dan tepat.
+
+
+Memo of minutes
+
+Master kendaraan
+    - identitas kendaraan
+
+Transaksi :
+    - Input data maintenance 
+        - nopol, km, mulai
+        - nopol, km, selesai, spare part, pekerjaan keluar, deskripsi bebas
+    
+    - Notifikasi  untuk pengingat  

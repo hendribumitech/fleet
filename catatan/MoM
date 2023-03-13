@@ -1,0 +1,11 @@
+Master kendaraan
+    - identitas kendaraan
+
+Transaksi :
+    - Input data maintenance 
+        - nopol, km, mulai
+        - nopol, km, selesai, spare part, pekerjaan keluar, deskripsi bebas
+    
+    - Notifikasi  untuk pengingat  
+    
+    

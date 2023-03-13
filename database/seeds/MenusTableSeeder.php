@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Base\MenusTree;
 use Illuminate\Database\Seeder;
 
 class MenusTableSeeder extends Seeder
@@ -18,9 +19,7 @@ class MenusTableSeeder extends Seeder
         
         \DB::table('menus')->insert(array (
             0 => 
-            array (
-                '_lft' => 9,
-                '_rgt' => 40,
+            array (                
                 'created_at' => '2021-08-09 08:10:07',
                 'description' => 'Header menu master',
                 'icon' => 'cil-address-book',
@@ -31,45 +30,13 @@ class MenusTableSeeder extends Seeder
                 'seq_number' => 1,
                 'status' => '1',
                 'updated_at' => '2021-10-29 14:51:54',
-            ),
+            ),            
             1 => 
-            array (
-                '_lft' => 41,
-                '_rgt' => 58,
-                'created_at' => '2021-08-09 08:10:07',
-                'description' => 'Header menu accounting',
-                'icon' => 'cil-address-book',
-                'id' => 2,
-                'name' => 'Accounting',
-                'parent_id' => NULL,
-                'route' => NULL,
-                'seq_number' => 2,
-                'status' => '1',
-                'updated_at' => '2021-10-29 14:51:57',
-            ),
-            2 => 
-            array (
-                '_lft' => 59,
-                '_rgt' => 74,
-                'created_at' => '2021-08-09 08:10:07',
-                'description' => 'Header menu inventory',
-                'icon' => 'cil-address-book',
-                'id' => 3,
-                'name' => 'Inventory',
-                'parent_id' => NULL,
-                'route' => NULL,
-                'seq_number' => 3,
-                'status' => '1',
-                'updated_at' => '2021-10-29 14:51:59',
-            ),
-            3 => 
-            array (
-                '_lft' => 32,
-                '_rgt' => 33,
+            array (             
                 'created_at' => '2021-08-09 08:10:07',
                 'description' => 'Manage menu',
                 'icon' => 'cil-address-book',
-                'id' => 4,
+                'id' => 2,
                 'name' => 'Menu',
                 'parent_id' => 1,
                 'route' => 'base/menus',
@@ -77,14 +44,12 @@ class MenusTableSeeder extends Seeder
                 'status' => '1',
                 'updated_at' => '2021-10-29 14:51:53',
             ),
-            4 => 
-            array (
-                '_lft' => 34,
-                '_rgt' => 35,
+            3 => 
+            array (                
                 'created_at' => '2021-08-09 08:10:07',
                 'description' => 'Manage users',
                 'icon' => 'cil-address-book',
-                'id' => 5,
+                'id' => 3,
                 'name' => 'User',
                 'parent_id' => 1,
                 'route' => 'base/users',
@@ -92,14 +57,12 @@ class MenusTableSeeder extends Seeder
                 'status' => '1',
                 'updated_at' => '2021-10-29 14:51:54',
             ),
-            5 => 
-            array (
-                '_lft' => 36,
-                '_rgt' => 37,
+            4 => 
+            array (                
                 'created_at' => '2021-08-09 08:10:07',
                 'description' => 'Manage role',
                 'icon' => 'cil-address-book',
-                'id' => 6,
+                'id' => 4,
                 'name' => 'Role',
                 'parent_id' => 1,
                 'route' => 'base/roles',
@@ -107,14 +70,12 @@ class MenusTableSeeder extends Seeder
                 'status' => '1',
                 'updated_at' => '2021-10-29 14:51:54',
             ),
-            6 => 
-            array (
-                '_lft' => 38,
-                '_rgt' => 39,
+            5 => 
+            array (                
                 'created_at' => '2021-08-09 08:10:07',
                 'description' => 'Manage permissions',
                 'icon' => 'cil-address-book',
-                'id' => 7,
+                'id' => 5,
                 'name' => 'Permission',
                 'parent_id' => 1,
                 'route' => 'base/permissions',
@@ -122,8 +83,8 @@ class MenusTableSeeder extends Seeder
                 'status' => '1',
                 'updated_at' => '2021-10-29 14:51:54',
             )            
-        ));
-        
-        
+        ));           
+
+        MenusTree::fixTree();
     }
 }
