@@ -3,6 +3,7 @@
 namespace App\Models\Fleet;
 
 use App\Models\Base as Model;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -111,5 +112,9 @@ class VehicleDocument extends Model
 
     protected function getExpiredAtAttribute($value){
         return localFormatDate($value);
+    }
+
+    protected function scopeAlmostExpired($query, $minDays = 5){
+        return $query->where('expired_at','<=', Carbon::now()->addDays($minDays)->format('Y-m-d'));
     }
 }

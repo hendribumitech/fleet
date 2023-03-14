@@ -35,7 +35,7 @@ class UpdateMaintenanceRequest extends FormRequest
         $vehicleId = $this->get('vehicle_id');        
         if($vehicleId){
             $lastMaintenance = Maintenance::select(['odometer'])->where('id','<', $idMaintenance)->whereVehicleId($vehicleId)->orderBy('id','desc')->first();
-            \Log::error('$lastMaintenance '.$lastMaintenance);
+            
             if($lastMaintenance){
                 $odometer = $rules['odometer'];
                 $rules['odometer'] = $odometer.'|min:'.$lastMaintenance->odometer;
