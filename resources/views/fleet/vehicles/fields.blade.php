@@ -46,6 +46,14 @@
 </div>
 </div>
 
+<!-- Owner Name Field -->
+<div class="form-group row mb-3">
+    {!! Form::label('cilinder_capacity', __('models/vehicles.fields.cilinder_capacity').':', ['class' => 'col-md-3 col-form-label']) !!}
+<div class="col-md-9"> 
+    {!! Form::text('cilinder_capacity', null, ['class' => 'form-control inputmask', 'required' => 'required', 'data-unmask' => 1, 'data-optionmask' => json_encode( config('local.number.integer'))]) !!}
+</div>
+</div>
+
 <!-- Registration Year Field -->
 <div class="form-group row mb-3">
     {!! Form::label('registration_year', __('models/vehicles.fields.registration_year').':', ['class' => 'col-md-3 col-form-label']) !!}

@@ -126,7 +126,8 @@ class VehicleDataTable extends DataTable
             //'owner_name' => new Column(['title' => __('models/vehicles.fields.owner_name'),'name' => 'owner_name', 'data' => 'owner_name', 'searchable' => true, 'elmsearch' => 'text']),
             //'registration_year' => new Column(['title' => __('models/vehicles.fields.registration_year'),'name' => 'registration_year', 'data' => 'registration_year', 'searchable' => true, 'elmsearch' => 'text']),
             //'purchase_date' => new Column(['title' => __('models/vehicles.fields.purchase_date'),'name' => 'purchase_date', 'data' => 'purchase_date', 'searchable' => true, 'elmsearch' => 'text']),
-            //'vehicle_ownership_number' => new Column(['title' => __('models/vehicles.fields.vehicle_ownership_number'),'name' => 'vehicle_ownership_number', 'data' => 'vehicle_ownership_number', 'searchable' => true, 'elmsearch' => 'text'])
+            //'vehicle_ownership_number' => new Column(['title' => __('models/vehicles.fields.vehicle_ownership_number'),'name' => 'vehicle_ownership_number', 'data' => 'vehicle_ownership_number', 'searchable' => true, 'elmsearch' => 'text']),
+            'cilinder_capacity' => new Column(['title' => __('models/vehicles.fields.cilinder_capacity'),'name' => 'cilinder_capacity', 'class' => 'text-end' ,'data' => 'cilinder_capacity', 'searchable' => false, 'elmsearch' => 'text']),
         ];
     }
 

@@ -15,5 +15,6 @@ return array (
     'registration_year' => 'Registration Year',
     'purchase_date' => 'Purchase Date',
     'vehicle_ownership_number' => 'Vehicle Ownership Number',
+    'cilinder_capacity' => 'Cilinder Capacity'
   ),
 );
