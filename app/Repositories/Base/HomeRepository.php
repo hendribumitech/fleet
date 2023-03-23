@@ -35,13 +35,13 @@ class HomeRepository
     // get all document vechicle almost expired
     private function documentNotifications(){
         $result = [];        
-        $documentVehicle = VehicleDocument::with(['vehicle', 'document'])->almostExpired()->get()->groupBy('document_id');
+        $documentVehicle = VehicleDocument::whereHas('vehicle')->with(['vehicle', 'document'])->active()->almostExpired()->get()->groupBy('document_id');
         if($documentVehicle){
             $tmp = ['title' => '', 'datas' => []];
             foreach($documentVehicle as $docs){
                 $tmp['title'] = $docs->first()->document->name;
                 foreach($docs as $doc){
-                    $tmp['datas'][] = ['url' => route('fleet.vehicles.documents.index', [$doc->vehicle_id]) , 'text' => $doc->name ?? '-' .' kendaraan '. $doc->vehicle->name ?? '-'.' aktif sampai dengan <strong>'.$doc->expired_at.'</strong>'];
+                    $tmp['datas'][] = ['url' => route('fleet.vehicles.documents.index', [$doc->vehicle_id]) , 'text' => ($doc->name ?? '-') .' kendaraan '. ($doc->vehicle->name ?? '-').' aktif sampai dengan <strong>'.$doc->expired_at.'</strong>'];
                     $result[] = $tmp;
                 }
             }

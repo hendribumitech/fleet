@@ -43,4 +43,34 @@ class VehicleDocumentRepository extends BaseRepository
     {
         return VehicleDocument::class;
     }
+
+    /**
+     * Create model record.
+     *
+     * @param array $input
+     *
+     * @return Model
+     */
+    public function create($input)
+    {
+        $this->model->getConnection()->beginTransaction();
+
+        try {
+            $input['active'] = $input['active'] ?? 1;
+            $model = $this->model->newInstance($input);
+            $model->save();            
+            $this->setNonActiveOlderDocument($model);
+            $this->model->getConnection()->commit();
+            return $model;
+        } catch (\Exception $e) {
+            $this->model->getConnection()->rollBack();
+            return $e;
+        }   
+    }    
+
+    private function setNonActiveOlderDocument($model){        
+        VehicleDocument::where(['document_id' => $model->document_id, 'vehicle_id' => $model->vehicle_id, 'active' => 1])
+            ->where('id', '<>', $model->id)->where('expired_at', '<=', $model->getRawOriginal('expired_at'))
+            ->update(['active' => 0]);
+    }
 }

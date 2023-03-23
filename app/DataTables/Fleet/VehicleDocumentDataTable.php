@@ -37,7 +37,10 @@ class VehicleDocumentDataTable extends DataTable
                 $dataTable->filterColumn($column, new $operator($columnSearch));                
             }
         }
-        $dataTable->editColumn('path_file', function($item){
+        $dataTable->editColumn('active', function($item){
+            return $item->active ? 'Aktif' : 'Non Aktif';
+        })        
+        ->editColumn('path_file', function($item){
             if($item->path_file){
                 return '<a href="'.Storage::url('').'?path='.$item->path_file.'" target="_blank">file attachment</a>';
             }
@@ -132,7 +135,8 @@ class VehicleDocumentDataTable extends DataTable
             // 'vehicle_id' => new Column(['title' => __('models/vehicleDocuments.fields.vehicle_id'),'name' => 'vehicle_id', 'data' => 'vehicle_id', 'searchable' => true, 'elmsearch' => 'text']),
             'path_file' => new Column(['title' => __('models/vehicleDocuments.fields.path_file'),'name' => 'path_file', 'data' => 'path_file', 'searchable' => true, 'elmsearch' => 'text']),
             'issued_at' => new Column(['title' => __('models/vehicleDocuments.fields.issued_at'),'name' => 'issued_at', 'data' => 'issued_at', 'searchable' => true, 'elmsearch' => 'text']),
-            'expired_at' => new Column(['title' => __('models/vehicleDocuments.fields.expired_at'),'name' => 'expired_at', 'data' => 'expired_at', 'searchable' => true, 'elmsearch' => 'text'])
+            'expired_at' => new Column(['title' => __('models/vehicleDocuments.fields.expired_at'),'name' => 'expired_at', 'data' => 'expired_at', 'searchable' => true, 'elmsearch' => 'text']),
+            'active' => new Column(['title' => __('models/vehicleDocuments.fields.active'),'name' => 'active', 'data' => 'active', 'searchable' => false, 'elmsearch' => 'text'])
         ];
     }
 

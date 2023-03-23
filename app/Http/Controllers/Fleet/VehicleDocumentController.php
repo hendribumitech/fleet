@@ -133,9 +133,14 @@ class VehicleDocumentController extends AppBaseController
         }
         $input = $request->all();
         $input['vehicle_id'] = $vehicle->id;
+        $input['path_file'] = $vehicleDocument->getRawOriginal('path_file');
         if($request->file('file_upload')){            
-            $input['path_file'] = $this->uploadFile($request, 'file_upload');
+            $pathFile = $this->uploadFile($request, 'file_upload');
+            if($pathFile){
+                $input['path_file'] = $pathFile;
+            }
         }
+        
         $vehicleDocument = $this->getRepositoryObj()->update($input, $id);
         if($vehicleDocument instanceof Exception){
             return redirect()->back()->withInput()->withErrors(['error', $vehicleDocument->getMessage()]);
@@ -188,7 +193,8 @@ class VehicleDocumentController extends AppBaseController
             'baseRoute' => $this->baseRoute,
             'baseView' => $this->baseView,
             'documentItems' => ['' => __('crud.option.document_placeholder')] + $document->pluck(),
-            'vehicleItems' => ['' => __('crud.option.vehicle_placeholder')] + $vehicle->pluck()            
+            'vehicleItems' => ['' => __('crud.option.vehicle_placeholder')] + $vehicle->pluck(),
+            'activeItems' => ['1' => __('crud.state_active'), '0' => __('crud.state_nonactive')],
         ];
     }
 }

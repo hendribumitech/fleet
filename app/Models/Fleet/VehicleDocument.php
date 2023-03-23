@@ -56,7 +56,8 @@ class VehicleDocument extends Model
         'vehicle_id',
         'path_file',
         'issued_at',
-        'expired_at'
+        'expired_at',
+        'active'
     ];
 
     /**
@@ -72,7 +73,8 @@ class VehicleDocument extends Model
         'vehicle_id' => 'integer',
         'path_file' => 'string',
         'issued_at' => 'date',
-        'expired_at' => 'date'
+        'expired_at' => 'date',
+        'active' => 'bool'
     ];
 
     /**
@@ -112,9 +114,13 @@ class VehicleDocument extends Model
 
     protected function getExpiredAtAttribute($value){
         return localFormatDate($value);
-    }
+    }    
 
     protected function scopeAlmostExpired($query, $minDays = 5){
         return $query->where('expired_at','<=', Carbon::now()->addDays($minDays)->format('Y-m-d'));
+    }
+
+    protected function scopeActive($query){
+        return $query->whereActive(true);
     }
 }

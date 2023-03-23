@@ -13,6 +13,7 @@ return array (
     'path_file' => 'Path File',
     'issued_at' => 'Issued At',
     'expired_at' => 'Expired At',
-    'file_upload' => 'Attachment'
+    'file_upload' => 'Attachment',
+    'active' => 'Active'
   ),
 );

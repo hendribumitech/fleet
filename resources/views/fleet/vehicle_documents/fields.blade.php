@@ -50,3 +50,15 @@
     {!! Form::text('expired_at', null, ['class' => 'form-control datetime', 'required' => 'required' ,'data-optiondate' => json_encode( ['locale' => ['format' => config('local.date_format_javascript') ]]),'id'=>'expired_at']) !!}
 </div>
 </div>
+
+@if (isset($vehicleDocument))
+<!-- Active Field -->
+<div class="form-group row mb-3">
+    {!! Form::label('active', __('models/vehicleDocuments.fields.active').':', ['class' => 'col-md-3 col-form-label']) !!}
+    <div class="col-md-9">
+        {!! Form::select('active', $activeItems, null, ['class' => 'form-control select2', 'required' => 'required',
+        'placeholder' => __('models/menus.option.menu_status_placeholder')]) !!}
+    </div>
+</div>
+    
+@endif

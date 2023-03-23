@@ -51,7 +51,8 @@ class Document extends Model
     public $fillable = [
         'code',
         'name',
-        'description'
+        'description',
+        'active'
     ];
 
     /**
@@ -63,7 +64,7 @@ class Document extends Model
         'id' => 'integer',
         'code' => 'string',
         'name' => 'string',
-        'description' => 'string'
+        'description' => 'string'        
     ];
 
     /**
