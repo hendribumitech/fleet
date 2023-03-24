@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('tools', Fleet\ToolController::class, ["as" => 'fleet', 'middleware' => ['easyauth']]);
         Route::resource('drivers', Fleet\DriverController::class, ["as" => 'fleet', 'middleware' => ['easyauth']]);
         Route::resource('maintenances', Fleet\MaintenanceController::class, ["as" => 'fleet']);
+        Route::get('maintenances/history/{id}', [App\Http\Controllers\Fleet\MaintenanceController::class, 'history'])->name('fleet.maintenances.history');
         Route::resource('documents', Fleet\DocumentController::class, ["as" => 'fleet']);        
     });
 

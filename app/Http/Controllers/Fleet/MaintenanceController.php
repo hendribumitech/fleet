@@ -9,10 +9,12 @@ use App\Repositories\Fleet\MaintenanceRepository;
 use App\Repositories\Fleet\VehicleRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Fleet\Vehicle;
 use App\Repositories\Fleet\CategoryRepository;
 use Carbon\Carbon;
 use Response;
 use Exception;
+use PDF;
 
 class MaintenanceController extends AppBaseController
 {
@@ -183,5 +185,22 @@ class MaintenanceController extends AppBaseController
             'vehicleItems' => ['' => __('crud.option.vehicle_placeholder')] + $vehicle->pluck(),
             'categoryItems' => ['' => __('crud.option.vehicle_placeholder')] + $categories->pluck()
         ];
+    }
+
+    public function history(int $vehicleId){
+        $vehicle = Vehicle::with(['maintenances' => function($q){
+            $q->with('maintenanceSpareparts', 'maintenanceServices');
+        }])->find($vehicleId);
+        $path = './vendor/images/logo.png';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $html = view('fleet.maintenances.history_pdf',['vehicle' => $vehicle, 'base64' => $base64])->render();
+        
+        
+        $pdf = PDF::loadHTML($html)->setPaper('a4')->setOrientation('portrait')->setOption('margin-top', 2)->setOption('margin-bottom', 0);
+        // PDF::loadView('pdf.payslip',['payroll' => $payroll])->setPaper('a4')->setOrientation('landscape');
+        return $pdf->download('history_maintenance_'.$vehicle->registration_number.'.pdf');
+
     }
 }
