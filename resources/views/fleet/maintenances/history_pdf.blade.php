@@ -8,13 +8,8 @@
         .table {
             font-size: 85%;
             vertical-align: top;
-            width: 100%;            
-        }
-                
-        .table-header td {
-            padding: 4px 2px;
-        }
-
+            width: 100%;
+        }                
         .table-bordered{            
             border-collapse : collapse;	            
         }
@@ -22,6 +17,7 @@
         .table-bordered tr td{
             border: .5px solid #000;
             border-collapse : collapse;	
+            padding: 4px;
         }
         .table-bordered tr th {
             border: .5px solid #000;
@@ -34,45 +30,16 @@
             text-align: left;
         }
 
+        tr { 
+            page-break-inside: avoid; 
+        }
     </style>
 
     <title>History Maintenance</title>
 </head>
 
 <body style="margin-bottom: 2pt">
-    <div>
-        <table class="table-header">
-            <tr>
-                <td>                    
-                    <img width="118" height="46" src="{{ $base64 }}" />
-                </td>
-                <td>
-                    <div style="font-size:120%">HISTORY MAINTENANCE</div>
-                    <div style="font-size:120%">{{ $vehicle->name }}</div>
-                </td>
-
-            </tr>
-        </table>
-        <hr>
-        <table class="table table-header">
-            <tbody>
-                <tr>
-                    <td>Nopol</td>
-                    <td> : {{ $vehicle->registration_number }}</td>
-                    <td style="width:10%">&nbsp;</td>
-                    <td>Merk</td>
-                    <td> : {{ $vehicle->merk }}</td>
-                </tr>
-                <tr>
-                    <td>Kapasitas Silinder</td>
-                    <td> : {{ $vehicle->cilinder_capacity }}</td>
-                    <td style="width:30%">&nbsp;</td>
-                    <td>Tahun</td>
-                    <td> : {{ $vehicle->registration_year }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
+    <div>        
         <table class="table table-bordered text-center table-content">
             <thead>
                 <tr>
@@ -82,10 +49,7 @@
                     <td>Perbaikan / Sparepart</td>
                 </tr>
             </thead>
-            <tbody>
-                @for ($i = 0; $i < 10; $i++)
-                    
-                
+            <tbody>                
                 @foreach ($vehicle->maintenances as $maintenance)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
@@ -117,8 +81,7 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
-                @endfor
+                @endforeach                
             </tbody>
         </table>
     </div>

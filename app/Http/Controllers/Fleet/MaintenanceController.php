@@ -195,10 +195,18 @@ class MaintenanceController extends AppBaseController
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $headerHtml = view('fleet.maintenances.header_pdf',['vehicle' => $vehicle, 'base64' => $base64])->render();
         $html = view('fleet.maintenances.history_pdf',['vehicle' => $vehicle, 'base64' => $base64])->render();
         
-        
-        $pdf = PDF::loadHTML($html)->setPaper('a4')->setOrientation('portrait')->setOption('margin-top', 2)->setOption('margin-bottom', 0);
+        //$headerHtml = '<div>Test header saja</div>';
+        //$footerHtml = '<footer>ini footer</footer>';
+        $pdf = PDF::loadHTML($html)->setPaper('a4')
+            ->setOrientation('portrait')
+            ->setOption('margin-top', 30)                
+            ->setOption('margin-bottom', 20)
+            ->setOption('footer-center', '[page]/[topage]')
+            ->setOption('header-html', $headerHtml);
+          //  ->setOption('footer-html', $footerHtml);
         // PDF::loadView('pdf.payslip',['payroll' => $payroll])->setPaper('a4')->setOrientation('landscape');
         return $pdf->download('history_maintenance_'.$vehicle->registration_number.'.pdf');
 

@@ -21,6 +21,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/laravel-model-caching": "0.11.7",
         "guzzlehttp/guzzle": "^7.4",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "infyomlabs/coreui-templates": "^1.0",
         "infyomlabs/laravel-generator": "*",
         "jenssegers/date": "^4.0",
