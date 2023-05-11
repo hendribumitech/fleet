@@ -33,14 +33,15 @@ class UpdateMaintenanceRequest extends FormRequest
         
         $rules = $this->excludeKeys ? array_diff_key($rules, array_combine($this->excludeKeys, $this->excludeKeys)) : $rules;
         $vehicleId = $this->get('vehicle_id');        
-        if($vehicleId){
-            $lastMaintenance = Maintenance::select(['odometer'])->where('id','<', $idMaintenance)->whereVehicleId($vehicleId)->orderBy('id','desc')->first();
+        // sementara matikan dulu nanti diaktifkan lagi
+        // if($vehicleId){
+        //     $lastMaintenance = Maintenance::select(['odometer'])->where('id','<', $idMaintenance)->whereVehicleId($vehicleId)->orderBy('id','desc')->first();
             
-            if($lastMaintenance){
-                $odometer = $rules['odometer'];
-                $rules['odometer'] = $odometer.'|min:'.$lastMaintenance->odometer;
-            }            
-        }
+        //     if($lastMaintenance){
+        //         $odometer = $rules['odometer'];
+        //         $rules['odometer'] = $odometer.'|min:'.$lastMaintenance->odometer;
+        //     }            
+        // }
         return $rules;
     }
 
