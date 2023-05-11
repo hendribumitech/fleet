@@ -11,10 +11,11 @@ if (!function_exists('localFormatDate')) {
     }
 }
 
-if (!function_exists('localFormatDateTime')) {
+if (!function_exists('localFormatDateTime')) {    
     function localFormatDateTime($value)
     {
-        return $value ? Date::parse($value)->format(config('local.datetime_format')) : null;
+        if(is_null($value)) return NULL;
+        return Date::parse($value)->format(config('local.datetime_format'));
     }
 }
 

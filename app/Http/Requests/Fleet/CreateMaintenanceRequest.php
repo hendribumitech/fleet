@@ -29,13 +29,14 @@ class CreateMaintenanceRequest extends FormRequest
     {
         $rules = Maintenance::$rules;
         $vehicleId = $this->get('vehicle_id');
-        if($vehicleId){
-            $lastMaintenance = Maintenance::select(['odometer'])->whereVehicleId($vehicleId)->orderBy('id','desc')->first();
-            if($lastMaintenance){
-                $odometer = $rules['odometer'];
-                $rules['odometer'] = $odometer.'|min:'.$lastMaintenance->odometer;
-            }            
-        }
+        // sementara matikan dulu nanti diaktifkan lagi
+        // if($vehicleId){
+        //     $lastMaintenance = Maintenance::select(['odometer'])->whereVehicleId($vehicleId)->orderBy('id','desc')->first();
+        //     if($lastMaintenance){
+        //         $odometer = $rules['odometer'];
+        //         $rules['odometer'] = $odometer.'|min:'.$lastMaintenance->odometer;
+        //     }
+        // }
         
         return $rules;
     }

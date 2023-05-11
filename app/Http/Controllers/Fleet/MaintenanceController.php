@@ -106,9 +106,9 @@ class MaintenanceController extends AppBaseController
 
             return redirect(route($this->baseRoute.'.index'));
         }
-        if(empty($maintenance->getRawOriginal('end'))){
-            $maintenance->end = localFormatDateTime(Carbon::now());
-        }
+        // if(empty($maintenance->getRawOriginal('end'))){
+        //     $maintenance->end = localFormatDateTime(Carbon::now());
+        // }
         $tmpIndex = 'tmp_'.time();
         return view($this->baseView.'.edit')->with(['maintenance' => $maintenance, 'services' => $services, 'spareparts' => $spareparts, 'tmpIndex' => $tmpIndex])->with($this->getOptionItems())->with(['end' => true]);
     }
