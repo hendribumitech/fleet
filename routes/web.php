@@ -45,7 +45,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('drivers', Fleet\DriverController::class, ["as" => 'fleet', 'middleware' => ['easyauth']]);
         Route::resource('maintenances', Fleet\MaintenanceController::class, ["as" => 'fleet']);
         Route::get('maintenances/history/{id}', [App\Http\Controllers\Fleet\MaintenanceController::class, 'history'])->name('fleet.maintenances.history');
+        Route::resource('categories', Fleet\CategoryController::class, ["as" => 'fleet']);
         Route::resource('documents', Fleet\DocumentController::class, ["as" => 'fleet']);        
+
+        Route::resource('checklistItems', Fleet\ChecklistItemController::class, ["as" => 'fleet']);
+    Route::resource('vehicleOdoometers', Fleet\VehicleOdoometerController::class, ["as" => 'fleet']);
+    Route::resource('vehicleChecklists', Fleet\VehicleChecklistController::class, ["as" => 'fleet']);
     });
 
     Route::get('/selectAjax', [App\Http\Controllers\SelectAjaxController::class, 'index'])->name('selectAjax');
@@ -68,9 +73,4 @@ Route::group(['prefix' => 'artisan'], function () {
     Route::get('clear_cache', function(){
         Artisan::call('cache:clear');
     });
-});
-
-
-Route::group(['prefix' => 'fleet'], function () {
-    Route::resource('categories', Fleet\CategoryController::class, ["as" => 'fleet']);
 });

@@ -2,30 +2,23 @@
 
 namespace App\Repositories\Fleet;
 
-use App\Models\Fleet\Vehicle;
+use App\Models\Fleet\VehicleOdoometer;
 use App\Repositories\BaseRepository;
 
 /**
- * Class VehicleRepository
+ * Class VehicleOdoometerRepository
  * @package App\Repositories\Fleet
- * @version March 11, 2023, 8:05 am WIB
+ * @version May 13, 2023, 8:43 am WIB
 */
 
-class VehicleRepository extends BaseRepository
+class VehicleOdoometerRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'registration_number',
-        'name',
-        'merk',
-        'engine_number',
-        'identity_number',
-        'owner_name',
-        'registration_year',
-        'purchase_date',
-        'vehicle_ownership_number'
+        'vehicle_id',
+        'odoometer'
     ];
 
     /**
@@ -43,6 +36,6 @@ class VehicleRepository extends BaseRepository
      **/
     public function model()
     {
-        return Vehicle::class;
+        return VehicleOdoometer::class;
     }
 }

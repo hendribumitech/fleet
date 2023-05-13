@@ -2,8 +2,10 @@
 
 namespace App\Models\Base;
 
+use App\Models\Fleet\Driver;
 use App\Traits\SearchModelTrait;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Cache;
@@ -78,6 +80,7 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'remember_token',
+        'driver_id'
     ];
 
     /**
@@ -109,6 +112,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
+        'driver_id' => 'integer',
     ];
 
     // Cache permissions and roles
@@ -136,15 +140,13 @@ class User extends Authenticatable
         return $roles->where('model_id', $this->id);
     }
 
-    public function getUnitAttribute()
+    /**
+     * Get the driver that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function driver(): BelongsTo
     {
-        $result = collect();
-        $this->roles->each(function ($item) use ($result) {
-            $item->units()->each(function ($unit) use ($result) {
-                $result->add($unit);
-            });
-        });
-
-        return $result;
+        return $this->belongsTo(Driver::class, 'driver_id');
     }
 }

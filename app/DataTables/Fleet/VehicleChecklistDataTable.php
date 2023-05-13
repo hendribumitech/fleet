@@ -1,19 +1,21 @@
 <?php
 
-namespace App\DataTables\Maintenance;
+namespace App\DataTables\Fleet;
 
-use App\Models\Maintenance\Maintenance;
+use App\Models\Fleet\VehicleChecklist;
 use App\DataTables\BaseDataTable as DataTable;
+use App\Repositories\Fleet\VehicleRepository;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
 
-class MaintenanceDataTable extends DataTable
+class VehicleChecklistDataTable extends DataTable
 {    
     /**
     * example mapping filter column to search by keyword, default use %keyword%
     */
     private $columnFilterOperator = [
-        //'name' => \App\DataTables\FilterClass\MatchKeyword::class,        
+        'vehicle_id' => \App\DataTables\FilterClass\InKeyword::class,
+        'checklist_date' => \App\DataTables\FilterClass\BetweenKeyword::class,
     ];
     
     private $mapColumnSearch = [
@@ -43,12 +45,12 @@ class MaintenanceDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Maintenance $model
+     * @param \App\Models\VehicleChecklist $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Maintenance $model)
+    public function query(VehicleChecklist $model)
     {
-        return $model->select([$model->getTable().'.*'])->with(['vehicle'])->newQuery();
+        return $model->with(['vehicle'])->select([$model->getTable().'.*'])->newQuery();
     }
 
     /**
@@ -116,11 +118,10 @@ class MaintenanceDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $vehicleItems = convertArrayPairValueWithKey((new VehicleRepository())->pluck());
         return [
-            'vehicle_id' => new Column(['title' => __('models/maintenances.fields.vehicle_id'),'name' => 'vehicle_id', 'data' => 'vehicle.name', 'searchable' => true, 'elmsearch' => 'text']),
-            'start' => new Column(['title' => __('models/maintenances.fields.start'),'name' => 'start', 'data' => 'start', 'searchable' => true, 'elmsearch' => 'text']),
-            'end' => new Column(['title' => __('models/maintenances.fields.end'),'name' => 'end', 'data' => 'end', 'searchable' => true, 'elmsearch' => 'text']),
-            'description' => new Column(['title' => __('models/maintenances.fields.description'),'name' => 'description', 'data' => 'description', 'searchable' => true, 'elmsearch' => 'text'])
+            'vehicle_id' => new Column(['title' => __('models/vehicleChecklists.fields.vehicle_id'),'name' => 'vehicle_id', 'data' => 'vehicle.name', 'searchable' => true, 'elmsearch' => 'dropdown', 'multiple' => 'multiple', 'listItem' => $vehicleItems]),
+            'checklist_date' => new Column(['title' => __('models/vehicleChecklists.fields.checklist_date'),'name' => 'checklist_date', 'data' => 'checklist_date', 'searchable' => true, 'elmsearch' => 'daterange'])
         ];
     }
 
@@ -131,7 +132,6 @@ class MaintenanceDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'maintenances_datatable_' . time();
+        return 'vehicle_checklists_datatable_' . time();
     }
-
 }

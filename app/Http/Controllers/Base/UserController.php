@@ -8,6 +8,7 @@ use App\Http\Requests\Base\CreateUserRequest;
 use App\Http\Requests\Base\UpdateUserRequest;
 use App\Repositories\Base\RoleRepository;
 use App\Repositories\Base\UserRepository;
+use App\Repositories\Fleet\DriverRepository;
 use Flash;
 use Response;
 
@@ -162,7 +163,9 @@ class UserController extends AppBaseController
      */
     private function getOptionItems()
     {
+        $driver = new DriverRepository();
         return [
+            'driverItems' => ['' => 'Pilih driver'] + $driver->pluck()
         ];
     }
 }

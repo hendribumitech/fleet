@@ -37,3 +37,18 @@ Route::group(['prefix' => 'base'], function () {
 Route::group(['prefix' => 'fleet'], function () {
     Route::resource('categories', App\Http\Controllers\API\Fleet\Fleet\CategoryAPIController::class);
 });
+
+
+Route::group(['prefix' => 'fleet'], function () {
+    Route::resource('checklist_items', App\Http\Controllers\API\Fleet\Fleet\ChecklistItemAPIController::class);
+});
+
+
+Route::group(['prefix' => 'fleet'], function () {
+    Route::resource('vehicle_odoometers', App\Http\Controllers\API\Fleet\Fleet\VehicleOdoometerAPIController::class);
+});
+
+
+Route::group(['prefix' => 'fleet'], function () {
+    Route::resource('vehicle_checklists', App\Http\Controllers\API\Fleet\Fleet\VehicleChecklistAPIController::class);
+});
