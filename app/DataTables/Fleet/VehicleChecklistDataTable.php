@@ -100,7 +100,7 @@ class VehicleChecklistDataTable extends DataTable
             ->parameters([
                 'dom'       => '<"row" <"col-md-6"B><"col-md-6 text-end"l>>rtip',
                 'stateSave' => true,
-                'order'     => [[0, 'desc']],
+                'order'     => [[1, 'desc']],
                 'buttons'   => $buttons,
                  'language' => [
                    'url' => url('vendor/datatables/i18n/en-gb.json'),
@@ -121,7 +121,8 @@ class VehicleChecklistDataTable extends DataTable
         $vehicleItems = convertArrayPairValueWithKey((new VehicleRepository())->pluck());
         return [
             'vehicle_id' => new Column(['title' => __('models/vehicleChecklists.fields.vehicle_id'),'name' => 'vehicle_id', 'data' => 'vehicle.name', 'searchable' => true, 'elmsearch' => 'dropdown', 'multiple' => 'multiple', 'listItem' => $vehicleItems]),
-            'checklist_date' => new Column(['title' => __('models/vehicleChecklists.fields.checklist_date'),'name' => 'checklist_date', 'data' => 'checklist_date', 'searchable' => true, 'elmsearch' => 'daterange'])
+            'checklist_date' => new Column(['title' => __('models/vehicleChecklists.fields.checklist_date'),'name' => 'checklist_date', 'data' => 'checklist_date', 'searchable' => true, 'elmsearch' => 'daterange']),
+            'summary' => new Column(['title' => __('models/vehicleChecklists.fields.summary'),'name' => 'summary', 'data' => 'summary', 'searchable' => false, 'elmsearch' => 'text'])
         ];
     }
 
